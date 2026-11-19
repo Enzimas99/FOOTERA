@@ -2,7 +2,7 @@
 
 :root{font-family:'DM Sans',Arial,sans-serif;color:#213c33;background:#f4f2ea;font-synthesis:none;--forest:#173d32;--ink:#203d32;--lime:#d8e970;--paper:#f8f7ef;--line:#dedfd1;--muted:#7d8b7d;--coral:#e78565}
 *{box-sizing:border-box}
-body{margin:0;min-width:320px}
+body{margin:0;min-width:0}
 button,input,select{font:inherit}
 button{cursor:pointer}
 button:disabled{cursor:wait;opacity:.65}
@@ -166,3 +166,34 @@ em{font-weight:400;color:#82985f}
 .game-dialog{width:min(430px,calc(100% - 32px));max-height:min(85vh,850px);padding:0;border:0;background:#fbfbf5;box-shadow:0 20px 80px #0008;color:#213c33;overscroll-behavior:contain}.game-dialog::backdrop{background:#071711bf}.game-dialog .profile-panel,.game-dialog .history-panel{border:0}.game-dialog .profile-art-bg{height:170px}.game-dialog .profile-art-bg .figure{height:195px}.dialog-head{height:52px;background:#1d4537;color:#ebefdc;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:9px;letter-spacing:.12em;font-weight:800;position:sticky;top:0;z-index:3}.dialog-head button{border:1px solid #ffffff35;background:transparent;color:#f4f5e8;width:32px;height:32px;font-size:15px}.dialog-head button:hover{background:#ffffff18}
 @media(max-width:760px){.matchday-header{padding:0 16px;height:62px}.matchday-header .save-status{display:none}.header-action{padding:0 10px}.matchday-main{padding:18px 14px 24px}.relationship-strip{grid-template-columns:repeat(3,minmax(0,1fr));margin:15px auto 18px}.relationship-strip .meter{padding:11px 9px}.relationship-strip .meter:nth-child(3){border-right:0}.relationship-strip .meter:nth-child(-n+3){border-bottom:1px solid #ffffff15}.relationship-strip .meter-heading{font-size:9px}.matchday-meta .meta-club strong{font-size:17px}.decision-message{font-size:22px}.decision-content{padding:20px 19px 18px}.decision-card .card-art{height:150px}.decision-card .card-art .figure{height:180px}.matchday-foot{margin-top:20px}}
 @media(max-width:390px){.matchday-header .brand-mark{width:31px;height:31px;font-size:14px}.matchday-header .brand-word{font-size:11px}.header-action{font-size:10px;gap:4px;padding:0 8px}.matchday-meta .meta-club span{font-size:8px}.relationship-strip .meter-heading{font-size:8px}.decision-card .choices{grid-template-columns:1fr}.decision-card .choice-button{min-height:48px}.decision-message{font-size:20px}.swipe-hint{font-size:8px}}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.matchday-meta .player-rating{position:relative;min-width:69px;padding:8px 27px 8px 10px;border:1px solid #d2df8c70;background:#d2df8c14}
+.player-rating strong{font-size:23px;line-height:1;color:#e0efa9}
+.player-rating small{position:absolute;bottom:9px;right:8px;font-size:9px;color:#bbd09c;font-weight:800}
+.meter-preview{width:6px;height:6px;margin-left:auto;border-radius:50%;background:#efaf82;opacity:0;box-shadow:0 0 0 3px #efaf8230}
+.meter-heading b{margin-left:0}
+.preview-left .meter[data-left="true"] .meter-preview,.preview-right .meter[data-right="true"] .meter-preview{opacity:1}
+.decision-card{position:relative;transform-origin:50% 90%;transition:transform .24s cubic-bezier(.2,.8,.2,1);animation:card-arrive .3s ease-out;will-change:transform}
+.decision-card.is-dragging{transition:none;cursor:grabbing}
+.decision-card:not(.is-dragging){cursor:grab}
+.decision-card .choice-button{cursor:pointer}
+.decision-card .choice-button.is-previewed{background:#dbe9bd;border-color:#8da27d}
+.swipe-preview{position:absolute;top:43px;left:50%;z-index:4;max-width:calc(100% - 38px);padding:7px 11px;background:#294c39;color:#f5f4df;font-size:10px;font-weight:800;letter-spacing:.04em;text-align:center;line-height:1.3;opacity:0;transform:translate(-50%,-6px);pointer-events:none;transition:opacity .15s,transform .15s}
+.decision-card.has-preview .swipe-preview{opacity:1;transform:translate(-50%,0)}
+.decision-card .card-art{height:185px;background:#b2c8ac}
+.decision-card .card-art:before,.decision-card .card-art:after{display:none}
+.decision-card .card-art .figure{display:block;width:100%;height:100%;max-width:none;transform:none}
+.swipe-hint{line-height:1.7}.swipe-hint span{font-size:8px;color:#82a28b;letter-spacing:.07em}
+.season-notice{max-width:850px;margin:0 auto 17px;padding:11px 14px;text-align:center;background:#d5e6b6;color:#294936;font-size:12px;font-weight:700}
+.skills-intro{padding:25px 22px 17px}.skills-intro h3{font:400 28px/1.1 'DM Serif Display',Georgia,serif;margin-top:6px}.skills-intro p{font-size:11px;color:#839487;line-height:1.5;margin-top:8px}
+.skills-list{padding:0 22px 22px}.skill-row{padding:9px 0;border-top:1px solid #e9eee3}.skill-row>div:first-child{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#526b5b;font-size:11px}.skill-row b{font-size:13px;color:#315341}.skill-track{height:4px;margin-top:7px;background:#e9ede4}.skill-track span{display:block;height:100%;background:#95b875}
+@keyframes card-arrive{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:760px){.decision-card .card-art{height:165px}.decision-card .card-art .figure{height:100%}.player-rating strong{font-size:20px}}
+@media(prefers-reduced-motion:reduce){.decision-card{animation:none;transition:none}.swipe-preview{transition:none}}
+.world-dialog{width:min(640px,calc(100% - 32px))}
+.world-intro,.world-empty{padding:24px 22px 16px}.world-intro h3,.world-empty h3{font:400 28px/1.1 'DM Serif Display',Georgia,serif;margin:7px 0}.world-intro p,.world-empty p{color:#7e9181;font-size:11px;line-height:1.5;margin-top:5px}
+.world-progress{margin:0 22px 18px;padding:12px 14px;background:#eaf1e1;display:flex;justify-content:space-between;gap:10px;color:#648068;font-size:9px;font-weight:800;letter-spacing:.06em}.world-progress b{color:#365b44;letter-spacing:0}
+.world-champions{padding:0 22px}.world-champions>summary{list-style:none;display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid #e9eee5;color:#526f59;font-size:11px;font-weight:800;cursor:pointer}.world-champions>summary::-webkit-details-marker{display:none}.world-champions>summary span{color:#a6bba0}.world-champions>div{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #e9eee5;color:#718675;font-size:11px}.world-champions b{color:#395c45;text-align:right}
+.world-note{margin:12px 22px;color:#849689;font-size:10px;line-height:1.5}.world-countries{border-top:1px solid #e1e8dc}.world-country>summary,.world-division>summary{list-style:none;display:flex;justify-content:space-between;gap:10px;padding:15px 22px;cursor:pointer;color:#355943;font-size:12px;font-weight:800;border-bottom:1px solid #e8eee4}.world-country>summary::-webkit-details-marker,.world-division>summary::-webkit-details-marker{display:none}.world-country>summary span{color:#b1c4a5}.world-divisions{background:#f2f6ed}.world-division>summary{padding-left:32px;color:#69856e;font-size:11px}.world-division>summary span{color:#95a993;font-size:9px}.division-content{padding:1px 12px 18px;background:#fbfbf5}.club-list{list-style:none;padding:0;margin:8px 10px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 12px}.club-list li{display:flex;align-items:center;gap:7px;min-width:0;padding:5px;font-size:10px;color:#667e6c;overflow-wrap:anywhere}.club-list i{width:9px;height:9px;flex:none;background:var(--team-color);border-radius:50%}.club-list .is-player-club,.standings .is-player-club{color:#2d5e3f;font-weight:800;background:#e5f0db}.table-scroll{overflow-x:auto;margin:0 10px}.standings{width:100%;border-collapse:collapse;font-size:10px;color:#607867}.standings th,.standings td{padding:7px 4px;border-bottom:1px solid #e9eee5;text-align:right;white-space:nowrap}.standings th:nth-child(2),.standings td:nth-child(2){text-align:left;white-space:normal}.standings th{color:#96a89a;font-size:9px}
+@media(max-width:390px){.matchday-header{padding:0 10px}.matchday-header-right{gap:4px}.header-action{padding:0 5px;font-size:9px}.matchday-meta{gap:8px}.matchday-meta .player-rating{min-width:86px}.matchday-meta .meta-right{flex-shrink:0;min-width:66px}.matchday-meta .meta-club span{overflow-wrap:anywhere}.relationship-strip .meter{padding:10px 5px}.relationship-strip .meter-heading{gap:3px}.relationship-strip .meter-icon{display:none}.meter-preview{width:5px;height:5px}.club-list{grid-template-columns:1fr 1fr}.world-progress{margin-left:16px;margin-right:16px}}

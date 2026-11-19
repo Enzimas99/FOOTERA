@@ -5,7 +5,54 @@ const elapsed = (state, key, turns) => Number.isInteger(state.memory[key]) && st
 const technical = state => state.player.position === 'goleiro' ? 'defesa' : 'controle';
 const passing = state => state.player.position === 'goleiro' ? 'posicionamento' : 'passe';
 
+const lastClubStanding = state => state.world?.lastSeason?.leagues
+  .flatMap(league => league.standings.map((row, index) => ({ ...row, position: index + 1, league })))
+  .find(row => row.clubId === state.player.club.id);
+const continentalEntry = state => {
+  const qualification = state.world?.qualification;
+  if (qualification?.sulAmericana.includes(state.player.club.id)) return 'Sul-Americana';
+  if (qualification?.europeia.includes(state.player.club.id)) return 'Europeia';
+  return null;
+};
+
 export const EVENTS = [
+  {
+    id: 'world_division_change_v3', category: 'CLUBE', actor: 'treinador', weight: 16,
+    eligible: state => state.world?.lastSeason?.movement.some(move => [...move.promoted, ...move.relegated].includes(state.player.club.id)) && state.memory.world_division_announcement !== state.world.lastSeason.season,
+    text: '{person} reúne o elenco: o {club} {movimento}. É hora de pensar em como enfrentar o novo desafio.',
+    textValues: state => ({ movimento: state.world.lastSeason.movement.some(move => move.promoted.includes(state.player.club.id)) ? 'conquistou o acesso à primeira divisão' : 'foi rebaixado para a segunda divisão' }),
+    options: [
+      option('Apoiar o grupo nessa mudança', state => ({ relationships: { equipe: 5, treinador: 3 }, memory: { world_division_announcement: state.world.lastSeason.season } })),
+      option('Cobrar mudanças no clube', state => ({ relationships: { clube: -3, torcida: 3 }, memory: { world_division_announcement: state.world.lastSeason.season } })),
+    ],
+  },
+  {
+    id: 'world_cup_final_v3', category: 'CLUBE', actor: 'torcida', weight: 14,
+    eligible: state => state.world?.lastSeason?.nationalCups.some(cup => cup.rounds.at(-1).matches.some(match => [match.home, match.away].includes(state.player.club.id))) && state.memory.world_cup_announcement !== state.world.lastSeason.season,
+    text: '{person} lembra a final da {copa}: o {club} {resultado}. A torcida ainda conversa sobre o que esse momento significa.',
+    textValues: state => {
+      const cup = state.world.lastSeason.nationalCups.find(item => item.rounds.at(-1).matches.some(match => [match.home, match.away].includes(state.player.club.id)));
+      return { copa: cup.name, resultado: cup.champion === state.player.club.id ? 'levantou a taça' : 'terminou com o vice-campeonato' };
+    },
+    options: [
+      option('Compartilhar o momento com a torcida', state => ({ relationships: { torcida: 5, equipe: 2 }, memory: { world_cup_announcement: state.world.lastSeason.season } })),
+      option('Deixar o resultado para trás', state => ({ relationships: { treinador: 3, torcida: -2 }, memory: { world_cup_announcement: state.world.lastSeason.season } })),
+    ],
+  },
+  {
+    id: 'world_league_review_v3', category: 'CLUBE', actor: 'treinador', weight: 8, cooldown: 18,
+    eligible: state => !!lastClubStanding(state),
+    text: '{person} comenta a última temporada do {club}: a equipe terminou em {posicao}º lugar, com {pontos} pontos. A comissão quer discutir o planejamento.',
+    textValues: state => ({ posicao: lastClubStanding(state).position, pontos: lastClubStanding(state).points }),
+    options: [option('Ajudar no planejamento coletivo', () => ({ relationships: { clube: 4, equipe: 3 } })), option('Priorizar minha preparação', state => ({ relationships: { treinador: 2 }, attributes: { [technical(state)]: 1 } }))],
+  },
+  {
+    id: 'world_continental_qualification_v3', category: 'CLUBE', actor: 'torcida', weight: 8, cooldown: 18,
+    eligible: state => !!continentalEntry(state),
+    text: '{person} comemora a classificação do {club} para a competição {competicao}, conquistada {origem}. A torcida quer saber como o elenco vai se preparar.',
+    textValues: state => ({ competicao: continentalEntry(state), origem: state.world.lastSeason.nationalCups.some(cup => cup.champion === state.player.club.id) ? 'com o título da copa nacional' : 'na última liga' }),
+    options: [option('Conversar com a torcida', () => ({ relationships: { torcida: 5, equipe: 1 } })), option('Concentrar-me na preparação', () => ({ relationships: { treinador: 3, torcida: -1 } }))],
+  },
   {
     id: 'coach_responsibility_v1', category: 'VESTIÁRIO', actor: 'treinador', weight: 5,
     text: 'Depois do treino, {person} chama você para conversar. A comissão quer dar mais responsabilidade ao seu futebol, mas a cobrança também vai aumentar.',

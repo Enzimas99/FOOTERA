@@ -1,6 +1,7 @@
 import { RELATIONSHIPS } from './data.js';
 import { EVENTS, findEvent, crisisEvent } from './events.js';
 import { calculateOverall, createPlayer } from './player.js';
+import { createWorld, simulateSeason } from './world.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -50,6 +51,8 @@ export function createCareer(details, source = Math.random) {
     randomState: Math.floor(source() * 4294967296) || 1,
     history: [], memory: {}, lastSeen: {}, currentEventId: null,
   };
+  career.world = createWorld(career);
+  career.seasonProgress = { decisions: 0, target: 16 + Math.floor(random(career) * 9) };
   career.currentEventId = nextEvent(career);
   return career;
 }
@@ -62,10 +65,13 @@ export function currentEvent(career) {
 
 export function choose(career, choiceIndex) {
   if (career.status !== 'active' || ![0, 1].includes(choiceIndex)) throw new Error('Escolha inválida.');
-  const updated = structuredClone(career);
-  // Format-1 saves receive defaults only on the copy being updated.
+  const { world, ...careerData } = career;
+  const updated = structuredClone(careerData);
+  // Legacy history is not replayed; migration begins at the next decision.
   updated.memory ??= {};
   updated.lastSeen ??= {};
+  updated.world = world ?? createWorld(updated);
+  updated.seasonProgress ??= { decisions: 0, target: 16 + Math.floor(random(updated) * 9) };
   const event = currentEvent(updated);
   const text = eventText(event, updated);
   const choice = event.options[choiceIndex];
@@ -95,6 +101,14 @@ export function choose(career, choiceIndex) {
   });
   updated.lastSeen[event.id] = updated.history.length;
   updated.revision += 1;
+  updated.seasonProgress.decisions++;
+  if (updated.seasonProgress.decisions >= updated.seasonProgress.target) {
+    updated.world = structuredClone(updated.world);
+    simulateSeason(updated.world, updated.season);
+    updated.season++;
+    updated.player.age++;
+    updated.seasonProgress = { decisions: 0, target: 16 + Math.floor(random(updated) * 9) };
+  }
   updated.currentEventId = nextEvent(updated);
   return updated;
 }

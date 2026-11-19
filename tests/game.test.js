@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { ATTRIBUTES, COUNTRIES, POSITIONS, RELATIONSHIPS } from '../src/game/data.js';
 import { choose, createCareer, currentEvent, eventText } from '../src/game/engine.js';
 import { EVENTS, findEvent } from '../src/game/events.js';
-import { calculateOverall } from '../src/game/player.js';
+import { calculateOverall, createPlayer } from '../src/game/player.js';
 
 function seeded(seed) {
   return () => ((seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 4294967296);
@@ -16,8 +16,7 @@ function newCareer(position = 'centroavante', seed = 42) {
 test('gera jogadores válidos em todas as posições', () => {
   for (const position of Object.keys(POSITIONS)) {
     for (let seed = 1; seed <= 75; seed++) {
-      const career = newCareer(position, seed);
-      const player = career.player;
+      const player = createPlayer({ name: 'Alex Silva', nationality: 'Brasil', position }, seeded(seed));
       assert.ok(player.age >= 16 && player.age <= 22);
       assert.ok(player.overall >= 65 && player.overall <= 72);
       assert.equal(player.overall, calculateOverall(player.attributes, position));
@@ -26,8 +25,8 @@ test('gera jogadores válidos em todas as posições', () => {
       assert.equal(Object.keys(player.relationships).length, Object.keys(RELATIONSHIPS).length);
       assert.equal(new Set(Object.values(player.people).map(person => person.id)).size, 6);
       assert.equal(new Set(Object.values(player.people).map(person => person.name)).size, 6);
-      assert.equal(currentEvent(career).options.length, 2);
     }
+    assert.equal(currentEvent(newCareer(position)).options.length, 2);
   }
 });
 
@@ -280,7 +279,7 @@ test('seleção respeita elegibilidade, cooldown e distribuição em carreiras l
       assert.ok(state.player.money >= 0);
       assert.ok(Object.values(state.player.relationships).every(value => value >= 0 && value <= 100));
       assert.ok(Object.values(state.player.attributes).every(value => value >= 1 && value <= 99));
-      assert.equal(state.season, 1);
+      assert.ok(state.season >= 1);
     }
     assert.ok(diversity.size >= 30, `pouca diversidade: ${diversity.size}`);
     assert.equal(state.memory.dupla_etapa, 'concluida');
@@ -308,4 +307,40 @@ test('limites registram deltas reais e escolhas são determinísticas após seri
   const bounded = choose(state, 0);
   assert.equal(bounded.player.money, 0);
   assert.equal(bounded.history.at(-1).changes.money, -100);
+});
+
+test('cartas de acesso e final de copa refletem resultados do mundo', () => {
+  const state = newCareer();
+  const clubId = state.player.club.id;
+  state.world.lastSeason = {
+    season: 1,
+    leagues: [],
+    movement: [{ promoted: [clubId], relegated: [] }],
+    nationalCups: [{ name: 'Copa Brasil', champion: clubId, rounds: [{ matches: [{ home: clubId, away: 'outro' }] }] }],
+  };
+  const promotion = findEvent('world_division_change_v3');
+  const cup = findEvent('world_cup_final_v3');
+  assert.ok(promotion.eligible(state));
+  assert.match(eventText(promotion, state), /conquistou o acesso/);
+  assert.ok(cup.eligible(state));
+  assert.match(eventText(cup, state), /levantou a taça/);
+  state.currentEventId = promotion.id;
+  const promoted = choose(state, 0);
+  assert.equal(promotion.eligible(promoted), false);
+  promoted.currentEventId = cup.id;
+  const champion = choose(promoted, 0);
+  assert.equal(cup.eligible(champion), false);
+  assert.match(champion.history.at(-1).text, /Copa Brasil/);
+});
+
+test('simular uma temporada não modifica o mundo da carreira anterior', () => {
+  const state = newCareer();
+  state.seasonProgress.decisions = state.seasonProgress.target - 1;
+  const before = structuredClone(state);
+  const next = choose(state, 0);
+  assert.deepEqual(state, before);
+  assert.notEqual(next.world, state.world);
+  assert.equal(state.world.lastSeason, null);
+  assert.equal(next.world.lastSeason.season, 1);
+  assert.equal(next.player.age, state.player.age + 1);
 });
