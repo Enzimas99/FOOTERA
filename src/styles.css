@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
+
+:root{font-family:'DM Sans',Arial,sans-serif;color:#213c33;background:#f4f2ea;font-synthesis:none;--forest:#173d32;--ink:#203d32;--lime:#d8e970;--paper:#f8f7ef;--line:#dedfd1;--muted:#7d8b7d;--coral:#e78565}
+*{box-sizing:border-box}
+body{margin:0;min-width:320px}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:disabled{cursor:wait;opacity:.65}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #d08d53;outline-offset:3px}
+.loading-screen{min-height:100vh;display:grid;place-items:center;font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.topbar{background:var(--forest);color:#f8f6e9}
+.topbar-inner{height:73px;max-width:1550px;margin:auto;padding:0 5.3%;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:37px;height:37px;border:1.5px solid #dce8a7;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:17px;letter-spacing:-5px;padding-right:5px;color:#dce8a7;transform:rotate(-5deg)}
+.brand-mark span:last-child{font-style:italic}
+.brand-word{font-size:13px;font-weight:800;letter-spacing:.06em;line-height:1}
+.brand-word>span{color:#c6dc8b}
+.brand-word small{display:block;font-size:6px;letter-spacing:.16em;margin-top:5px;font-weight:600;color:#aebfb0}
+.topbar-right{display:flex;align-items:center;gap:23px}
+.topbar-divider{height:25px;width:1px;background:#547164}
+.edition{font-size:9px;letter-spacing:.14em;font-weight:700;color:#b8cabc}
+.header-ball{font-size:24px;color:#d5e68d}
+.site-footer{max-width:1550px;margin:auto;padding:24px 5.3%;display:flex;justify-content:space-between;color:#9aa397;font-size:9px;font-weight:800;letter-spacing:.12em}
+.start-shell{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1.06fr .94fr;min-height:690px}
+.start-intro{padding:57px 9% 35px 10%;background:#e6eadb;overflow:hidden;position:relative}
+.intro-eyebrow,.form-top,.small-kicker,.tiny-label{font-size:9px;font-weight:800;letter-spacing:.15em}
+.intro-eyebrow{display:flex;align-items:center;gap:10px;color:#698072}
+.eyebrow-dot,.card-top i,.save-status i{width:7px;height:7px;background:#e5815b;border-radius:50%;display:inline-block;flex:none}
+.intro-line{width:34px;height:1px;background:#a5b5a5;margin-left:4px}
+h1,h2,h3,p{margin:0}
+.start-intro h1,.form-title h2,.error-screen h1{font:400 clamp(48px,5vw,76px)/.99 'DM Serif Display',Georgia,serif;letter-spacing:-.045em;margin-top:38px}
+em{font-weight:400;color:#82985f}
+.start-intro>p{max-width:390px;line-height:1.7;font-size:14px;color:#657b6c;margin-top:20px}
+.start-art{height:275px;max-width:480px;margin:32px auto 0;position:relative;border-radius:180px 180px 0 0;background:#c7d6bd;overflow:hidden}
+.start-art:before,.start-art:after{content:'';position:absolute;inset:25px 10% -70px;border:1px solid #e1e9d6;border-radius:50%}
+.start-art:after{inset:48px 18% -45px}
+.start-art .figure{height:310px;width:auto;max-width:100%;position:absolute;z-index:1;left:50%;bottom:-2px;transform:translateX(-50%)}
+.art-stamp{position:absolute;z-index:2;left:8%;top:65px;color:#345b47;font-size:9px;line-height:1.4;letter-spacing:.11em;font-weight:800;transform:rotate(-8deg)}
+.art-stamp strong{font:italic 26px/.9 'DM Serif Display',Georgia,serif;letter-spacing:0}
+.art-stamp span{display:block;color:#e27e5f;font-size:28px;margin-top:8px}
+.art-caption{position:absolute;right:4%;bottom:14px;z-index:2;display:flex;align-items:center;gap:7px;color:#446b55;font-size:8px;font-weight:800;letter-spacing:.09em;writing-mode:vertical-rl}
+.art-caption b{font-size:14px}
+.intro-bottom{max-width:480px;margin:20px auto 0;display:flex;align-items:center;justify-content:space-between;color:#829587;font-size:8px;font-weight:800;letter-spacing:.1em}
+.intro-bottom span:nth-child(2){font-size:18px;color:#e5815b}
+.start-form-wrap{background:#faf9f2;padding:57px 12% 50px}
+.form-top{display:flex;justify-content:space-between;padding-bottom:20px;border-bottom:1px solid var(--line);color:#8b9b8d}
+.form-title{margin:42px 0 32px}
+.small-kicker,.tiny-label{color:#98a88e}
+.form-title h2{font-size:56px;margin-top:12px}
+.form-title p{font-size:13px;color:#849286;margin-top:15px;line-height:1.5}
+#career-form label{display:flex;align-items:center;gap:9px;margin:24px 0 10px;color:#405d4e;font-size:9px;font-weight:800;letter-spacing:.1em}
+#career-form label span{color:#d98b6c;font-size:10px}
+#career-form input,#career-form select{width:100%;height:50px;border:1px solid #dce1d5;border-radius:2px;background:#fffefa;color:#28483a;padding:0 15px;font-size:13px;outline-offset:2px}
+#career-form input::placeholder{color:#acb8ab}
+#career-form select{appearance:none;padding-right:35px}
+.select-wrap{position:relative}
+.select-wrap:after{content:'⌄';position:absolute;right:15px;top:11px;color:#617969;pointer-events:none;font-size:20px}
+.form-error{min-height:16px;color:#aa503f;font-size:12px;margin-top:10px}
+.start-button{border:0;background:#1d493a;color:white;min-height:54px;width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:10px;font-weight:800;letter-spacing:.1em;transition:background .2s,transform .2s}
+.start-button:hover:not(:disabled){background:#2a5e48;transform:translateY(-2px)}
+.start-button span:last-child{font-size:19px;color:#d9e990}
+.save-note{display:flex;gap:9px;color:#9aa89a;font-size:10px;line-height:1.5;margin-top:17px}
+.save-note span{color:#d78b6a;font-size:16px;line-height:1}
+.game-shell{max-width:1490px;margin:auto;padding:35px 5.3% 25px}
+.game-topline{display:flex;align-items:end;justify-content:space-between;margin-bottom:22px;gap:20px}
+.game-topline h1{font:400 35px/1.1 'DM Serif Display',Georgia,serif;letter-spacing:-.03em;margin-top:6px}
+.game-top-meta{display:flex;align-items:center;gap:22px}
+.save-status{font-size:8px;letter-spacing:.1em;font-weight:800;color:#8a9c8c;display:flex;gap:7px;align-items:center}
+.save-status i{background:#a4bf78;width:6px;height:6px}
+.season-badge{border-left:1px solid #d3dcd0;padding-left:22px;color:#8a9c8c;font-size:9px;letter-spacing:.09em;font-weight:800;white-space:nowrap}
+.season-badge b{font-size:15px;color:#365343;margin-left:5px}
+.meters{background:#fffef8;border:1px solid #e5e8dd;display:grid;grid-template-columns:repeat(6,1fr);margin-bottom:27px}
+.meter{padding:16px 14px 15px;border-right:1px solid #edf0e6;min-width:0}
+.meter:last-child{border:0}
+.meter-heading{display:flex;align-items:center;gap:7px;font-size:10px;color:#61766a;font-weight:700;white-space:nowrap}
+.meter-heading b{margin-left:auto;color:#385748;font-size:10px}
+.meter-icon{font-size:14px;color:#d98b6c}
+.meter-track{height:4px;background:#e9ede4;margin-top:10px;border-radius:5px;overflow:hidden}
+.meter-track span{display:block;height:100%;background:#9cb67c;border-radius:5px}
+.game-grid{display:grid;grid-template-columns:minmax(195px,.8fr) minmax(360px,1.48fr) minmax(205px,.8fr);gap:25px;align-items:start}
+.profile-panel,.history-panel{border:1px solid #e2e6db;background:#fbfbf5}
+.panel-heading{height:48px;border-bottom:1px solid #e9ece3;display:flex;justify-content:space-between;align-items:center;padding:0 17px;color:#778b7b;font-size:9px;font-weight:800;letter-spacing:.12em}
+.panel-heading span:last-child{font-size:16px;color:#d18969}
+.profile-art{padding:15px 15px 0;position:relative}
+.profile-art-bg{height:135px;overflow:hidden;background:#e5eadb;display:flex;justify-content:center;align-items:flex-end}
+.profile-art-bg .figure{width:100%;height:170px;flex:none;transform:translateY(12px)}
+.profile-number{position:absolute;bottom:8px;right:25px;color:#7b9680;font-weight:800;font-size:10px;letter-spacing:.1em}
+.profile-info{padding:19px 17px 14px}
+.profile-info h3{font:400 25px/1.05 'DM Serif Display',Georgia,serif;letter-spacing:-.02em;margin-top:7px;overflow-wrap:anywhere}
+.profile-info p{font-size:11px;color:#8b9c8d;margin-top:7px}.profile-info p span{color:#dc9476;margin:0 3px}
+.profile-stats{margin:0 17px;padding:13px 0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #e8ece1;border-bottom:1px solid #e8ece1}
+.profile-stats div{border-right:1px solid #e8ece1;padding-left:12px}.profile-stats div:first-child{padding-left:0}.profile-stats div:last-child{border:0}
+.profile-stats small,.profile-club small{display:block;font-size:8px;font-weight:800;letter-spacing:.09em;color:#a0ae9f;margin-bottom:5px}
+.profile-stats strong{font-size:17px;color:#365746}
+.profile-club{padding:16px 17px;display:flex;align-items:center;gap:10px}
+.club-crest{display:grid;place-items:center;color:var(--club-detail);background:var(--club-color);border:2px solid var(--club-detail);outline:1px solid var(--club-color);width:32px;height:38px;clip-path:polygon(0 0,100% 0,100% 68%,50% 100%,0 68%);font-size:14px;flex:none}
+.profile-club b{font-size:11px;line-height:1.3;display:block}
+.profile-details{border-top:1px solid #e8ece1}
+.profile-details summary,.all-history summary{list-style:none;padding:14px 17px;font-size:10px;font-weight:800;color:#63816d;cursor:pointer;display:flex;justify-content:space-between}.profile-details summary::-webkit-details-marker,.all-history summary::-webkit-details-marker{display:none}
+.details-body{padding:0 17px 16px;font-size:11px;line-height:1.6;color:#788d7c}
+.details-body p{margin-bottom:10px}.details-body b{color:#4c6a58}.details-body p span{color:#d58e6e}
+.attribute-title{font-size:9px;font-weight:800;letter-spacing:.1em;margin:16px 0 6px;color:#6f8a76}
+.attribute-row{display:flex;justify-content:space-between;border-bottom:1px solid #eff1e9;padding:5px 0}.attribute-row b{color:#3c5d49}
+.story-header{display:flex;align-items:end;justify-content:space-between;margin:0 0 14px;gap:10px}
+.story-header h2{font:400 27px/1.05 'DM Serif Display',Georgia,serif;letter-spacing:-.025em;margin-top:6px}
+.chapter-count{font-size:9px;letter-spacing:.1em;font-weight:800;color:#9bab9a;white-space:nowrap}.chapter-count b{font-size:16px;color:#cd8a6d;margin-left:4px}
+.story-card{background:#fffef8;border:1px solid #dde3d6;box-shadow:0 8px 24px #274c3410;touch-action:pan-y;user-select:none}
+.card-top{height:39px;display:flex;align-items:center;justify-content:space-between;padding:0 17px;border-bottom:1px solid #edf0e7;color:#8ba08e;font-size:8px;font-weight:800;letter-spacing:.1em}
+.card-top span:first-child{color:#6e8a72;display:flex;align-items:center;gap:7px}.card-top i{width:6px;height:6px}
+.card-art{height:200px;margin:11px 11px 0;position:relative;background:#dce8d3;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.card-art:before,.card-art:after{content:'';position:absolute;border:1px solid #f1f4e6;border-radius:50%;width:270px;height:270px;top:20px;opacity:.7}
+.card-art:after{width:350px;height:350px;top:-20px}
+.card-art .figure{height:230px;max-width:100%;position:relative;z-index:1;transform:translateY(18px)}
+.art-side-text{position:absolute;left:15px;top:18px;writing-mode:vertical-rl;font-size:8px;font-weight:800;letter-spacing:.13em;color:#9eb4a0;z-index:2}.art-index{position:absolute;right:18px;top:12px;color:#e18764;font-size:27px}
+.story-copy{padding:17px 22px 19px}.speaker{display:flex;gap:9px;align-items:center}
+.speaker-avatar{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#e5ecda;color:#618169;font-size:9px;font-weight:800}
+.speaker small{display:block;font-size:8px;letter-spacing:.1em;color:#a2b2a0;font-weight:800}.speaker strong{display:block;font-size:11px;margin-top:3px;color:#4e6a58}
+.story-copy>p{font:400 19px/1.38 'DM Serif Display',Georgia,serif;color:#274438;margin-top:15px;min-height:80px}
+.card-bottom{border-top:1px solid #edf0e7;height:32px;display:flex;justify-content:center;align-items:center;gap:11px;color:#a7b6a4;font-size:8px;font-weight:800;letter-spacing:.12em}.card-bottom span{color:#d78a6c}
+.choices-heading{display:flex;justify-content:space-between;gap:8px;margin:19px 0 9px;color:#6b8270;font-size:8px;letter-spacing:.1em;font-weight:800}.choices-heading span:last-child{color:#acbaaa}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.choice-button{min-height:62px;border:1px solid #d8e1d4;background:#fffef8;text-align:left;padding:10px 10px;display:flex;align-items:center;gap:10px;color:#385b48;font-size:11px;font-weight:700;line-height:1.3;transition:border-color .18s,background .18s,transform .18s}
+.choice-button:hover:not(:disabled){border-color:#8caa85;background:#f0f5e8;transform:translateY(-2px)}
+.choice-letter{flex:none;border:1px solid #dce8d9;width:26px;height:26px;display:grid;place-items:center;color:#9caf97;font-size:10px}.choice-arrow{margin-left:auto;color:#bdcdbb;font-size:16px}
+.choice-hint{text-align:center;color:#a1b1a0;font-size:10px;margin:13px 0 0;line-height:1.4}
+.history-intro{padding:20px 18px 17px}.history-intro h3{font:400 25px/1.05 'DM Serif Display',Georgia,serif;letter-spacing:-.025em;margin-top:9px}.history-intro p{font-size:11px;line-height:1.6;color:#899b8c;margin-top:11px}
+.last-impact,.empty-journey{margin:0 18px;background:#edf2e5;padding:13px}.last-impact span{display:block;font-size:8px;font-weight:800;letter-spacing:.1em;color:#98ab91}.last-impact strong{display:block;font-size:11px;color:#4b6e55;line-height:1.4;margin-top:7px}.last-impact p{font-size:10px;color:#7d987e;line-height:1.4;margin-top:5px}
+.empty-journey{display:flex;gap:10px;align-items:center}.empty-journey span{font-size:22px;color:#d78a6c}.empty-journey p{font-size:10px;line-height:1.5;color:#829783}
+.history-list-title{display:flex;justify-content:space-between;border-top:1px solid #e9ede4;margin:20px 18px 0;padding-top:15px;font-size:9px;font-weight:800;letter-spacing:.1em;color:#839887}.history-list-title b{color:#d08d6e}
+.timeline{list-style:none;padding:0;margin:15px 18px}.timeline-entry{display:grid;grid-template-columns:24px 1fr;gap:9px;position:relative;padding-bottom:18px}.timeline-entry:not(:last-child):before{content:'';position:absolute;left:11px;top:23px;bottom:0;width:1px;background:#dfe8da}.timeline-marker{width:23px;height:23px;border:1px solid #dfe8da;border-radius:50%;display:grid;place-items:center;font-size:8px;color:#8ca58a;font-weight:800}.timeline-category{font-size:8px;color:#b0beae;font-weight:800;letter-spacing:.08em}.timeline-entry p{font-size:10px;font-weight:700;line-height:1.35;margin-top:4px}.timeline-entry small{font-size:9px;color:#94a795;line-height:1.4;display:block;margin-top:5px}
+.decision-detail summary{cursor:pointer;font-size:9px;font-weight:700;color:#76947b;margin-top:7px}.decision-detail p{font-weight:400;color:#617b69;line-height:1.5}.timeline-empty{margin:15px 18px 23px;font-size:10px;color:#a5b3a3}.all-history{border-top:1px solid #edf0e8}.all-history .timeline{margin-top:0}.history-foot{margin:5px 18px 18px;border-top:1px solid #edf0e8;padding-top:15px;display:flex;justify-content:space-between;color:#b0c0ad;font-size:8px;font-weight:800;letter-spacing:.09em;line-height:1.5}.history-foot span:last-child{font-size:22px;color:#dce9c1}
+.game-footer{border-top:1px solid #dfe5d9;display:flex;justify-content:space-between;align-items:center;margin-top:28px;padding-top:17px;color:#9aa99a;font-size:9px;letter-spacing:.09em;font-weight:800}.game-footer b{color:#55765d;font-size:12px;margin-left:8px}
+.notice{padding:12px 15px;margin-bottom:16px;background:#fff2e6;border:1px solid #e5bd9c;color:#92583f;font-size:12px;line-height:1.5}
+.error-screen{max-width:650px;margin:80px auto;padding:0 24px}.error-screen h1{margin:20px 0}.error-screen p{font-size:14px;color:#758779;line-height:1.6;margin:15px 0}.error-screen .start-button{margin-top:25px;max-width:290px}
+@media(max-width:1100px){.game-grid{grid-template-columns:minmax(180px,.75fr) minmax(330px,1.5fr) minmax(180px,.75fr);gap:15px}.game-shell{padding-left:3%;padding-right:3%}.meter{padding:14px 9px}.meter-heading{font-size:9px;gap:4px}.profile-stats div{padding-left:7px}.profile-stats small{font-size:7px}.history-intro h3{font-size:22px}.start-form-wrap{padding-left:9%;padding-right:9%}}
+@media(max-width:760px){.topbar-inner{height:62px;padding:0 20px}.edition,.topbar-divider{display:none}.start-shell{grid-template-columns:1fr}.start-intro{padding:35px 24px 25px}.start-intro h1{font-size:50px;margin-top:25px}.start-intro>p{font-size:13px}.start-art{height:225px;margin-top:24px}.start-art .figure{height:260px}.intro-bottom{font-size:7px}.start-form-wrap{padding:38px 24px 40px}.form-title{margin:30px 0 25px}.form-title h2{font-size:48px}.site-footer{padding:20px 24px;font-size:7px;gap:15px}.game-shell{padding:25px 16px}.game-topline h1{font-size:29px}.game-topline{align-items:start}.game-top-meta{gap:10px;align-items:end;flex-direction:column}.save-status{font-size:7px}.season-badge{padding:0;border:0}.meters{grid-template-columns:repeat(3,1fr);margin-bottom:23px}.meter:nth-child(3){border-right:0}.meter:nth-child(-n+3){border-bottom:1px solid #edf0e6}.meter{padding:12px 10px}.meter-heading{font-size:9px}.game-grid{display:flex;flex-direction:column;gap:20px}.story-section{order:0;width:100%}.profile-panel{order:1;width:100%}.history-panel{order:2;width:100%}.story-card .card-art{height:200px}.story-copy>p{min-height:0}.profile-art-bg{height:115px}.profile-art-bg .figure{height:155px}.profile-stats small{font-size:8px}.history-foot{margin-top:15px}.game-footer{font-size:8px;gap:15px}.game-footer span:last-child{white-space:nowrap}}
+@media(max-width:390px){.game-shell{padding-left:12px;padding-right:12px}.game-topline h1{font-size:25px}.meter{padding:10px 6px}.meter-heading{font-size:8px}.meter-icon{font-size:11px}.choices{grid-template-columns:1fr}.choice-button{min-height:52px}.choices-heading span:last-child{font-size:7px}.card-top{font-size:7px}.story-copy>p{font-size:18px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.matchday-shell{min-height:100vh;color:#f4f0dc;background-color:#102e27;background-image:linear-gradient(90deg,#102e27e6,#102e27a0 30%,#102e27a0 70%,#102e27e6),repeating-linear-gradient(0deg,transparent 0 69px,#ffffff08 70px 71px),repeating-linear-gradient(90deg,transparent 0 99px,#ffffff08 100px 101px)}
+.matchday-header{height:66px;padding:0 max(24px,5vw);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff15;background:#112d25}
+.matchday-header .brand-word{color:#f7f5e7}
+.matchday-header-right{display:flex;gap:10px;align-items:center}
+.matchday-header .save-status{color:#b3c3af;margin-right:17px}
+.header-action{min-height:36px;border:1px solid #ffffff2e;background:#ffffff08;color:#e9eed7;padding:0 13px;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700}
+.header-action:hover{border-color:#d5e68d;background:#ffffff12}.profile-action{color:#dcf0a7;border-color:#c5df9366}
+.matchday-main{max-width:990px;margin:auto;padding:20px 24px 25px}
+.matchday-meta,.matchday-foot{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.matchday-meta>div,.matchday-foot>div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.matchday-meta span,.matchday-foot span{color:#96ad9a;font-size:9px;letter-spacing:.12em;font-weight:800}
+.matchday-meta strong{color:#f3efd8;font-size:16px}.matchday-meta .meta-club{text-align:center}.matchday-meta .meta-club strong{font:400 20px/1.1 'DM Serif Display',Georgia,serif;overflow-wrap:anywhere}.meta-right{text-align:right}
+.relationship-strip{margin:18px auto 21px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-block:1px solid #ffffff20;max-width:850px}
+.relationship-strip .meter{padding:13px 10px;border-right:1px solid #ffffff15}
+.relationship-strip .meter:last-child{border-right:0}.relationship-strip .meter-heading{color:#c7d4bf;font-size:10px}.relationship-strip .meter-heading b{color:#f1f0d7}.relationship-strip .meter-icon{color:#d1df9a}.relationship-strip .meter-track{background:#ffffff20}.relationship-strip .meter-track span{background:#c8df89}
+.matchday-stage{max-width:480px;margin:auto}.stage-label{display:flex;align-items:center;justify-content:space-between;color:#9cb49c;font-size:8px;font-weight:800;letter-spacing:.16em;margin:0 5px 10px}.stage-label span:nth-child(2){font-size:15px;color:#e69c77}
+.decision-card{background:#e9dfc5;border:1px solid #b8b091;box-shadow:0 16px 40px #020f0b70;color:#233e31}
+.decision-card .card-top{border-bottom:1px solid #c9c4a9;color:#84967c}.decision-card .card-top span:first-child{color:#667e66}.decision-content{padding:22px 25px 20px}
+.decision-message{font:400 24px/1.27 'DM Serif Display',Georgia,serif;letter-spacing:-.01em;text-align:center;color:#203e31;overflow-wrap:anywhere}
+.decision-prompt{margin:22px 0 10px;text-align:center;color:#829179;font-size:9px;font-weight:800;letter-spacing:.14em}
+.decision-card .choices{grid-template-columns:1fr 1fr;gap:8px}.decision-card .choice-button{min-height:54px;padding:8px;background:#f8f4e4;border:1px solid #c8c9ad;color:#2e5140;font-size:11px}.decision-card .choice-button:hover:not(:disabled){background:#dbe9bd;border-color:#8da27d}
+.decision-card .choice-letter{border-color:#d3d8bd;width:23px;height:23px;color:#839a79}.decision-card .choice-arrow{color:#93a582}
+.decision-card .card-art{margin:0 11px;height:165px;background:#c5d7bc}.decision-card .card-art .figure{height:195px;transform:translateY(22px)}.decision-card .card-art:before{top:-15px}.decision-card .card-art:after{top:-45px}
+.card-person{display:flex;align-items:center;gap:9px;justify-content:center;padding:11px 12px 13px}.card-person span{font-size:8px;letter-spacing:.12em;font-weight:800;color:#87977d}.card-person strong{font-size:11px;color:#3c5c46}.card-person span:last-child{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#d3dec5;color:#6b8667;letter-spacing:0}
+.swipe-hint{text-align:center;color:#a8bda7;font-size:9px;font-weight:800;letter-spacing:.11em;margin:14px 0 0}
+.matchday-foot{max-width:850px;border-top:1px solid #ffffff20;margin:25px auto 0;padding-top:15px}.matchday-foot strong{font-size:11px;line-height:1.4;color:#d3e0cc}.matchday-main>.notice{max-width:850px;margin:0 auto 20px}
+.game-dialog{width:min(430px,calc(100% - 32px));max-height:min(85vh,850px);padding:0;border:0;background:#fbfbf5;box-shadow:0 20px 80px #0008;color:#213c33;overscroll-behavior:contain}.game-dialog::backdrop{background:#071711bf}.game-dialog .profile-panel,.game-dialog .history-panel{border:0}.game-dialog .profile-art-bg{height:170px}.game-dialog .profile-art-bg .figure{height:195px}.dialog-head{height:52px;background:#1d4537;color:#ebefdc;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:9px;letter-spacing:.12em;font-weight:800;position:sticky;top:0;z-index:3}.dialog-head button{border:1px solid #ffffff35;background:transparent;color:#f4f5e8;width:32px;height:32px;font-size:15px}.dialog-head button:hover{background:#ffffff18}
+@media(max-width:760px){.matchday-header{padding:0 16px;height:62px}.matchday-header .save-status{display:none}.header-action{padding:0 10px}.matchday-main{padding:18px 14px 24px}.relationship-strip{grid-template-columns:repeat(3,minmax(0,1fr));margin:15px auto 18px}.relationship-strip .meter{padding:11px 9px}.relationship-strip .meter:nth-child(3){border-right:0}.relationship-strip .meter:nth-child(-n+3){border-bottom:1px solid #ffffff15}.relationship-strip .meter-heading{font-size:9px}.matchday-meta .meta-club strong{font-size:17px}.decision-message{font-size:22px}.decision-content{padding:20px 19px 18px}.decision-card .card-art{height:150px}.decision-card .card-art .figure{height:180px}.matchday-foot{margin-top:20px}}
+@media(max-width:390px){.matchday-header .brand-mark{width:31px;height:31px;font-size:14px}.matchday-header .brand-word{font-size:11px}.header-action{font-size:10px;gap:4px;padding:0 8px}.matchday-meta .meta-club span{font-size:8px}.relationship-strip .meter-heading{font-size:8px}.decision-card .choices{grid-template-columns:1fr}.decision-card .choice-button{min-height:48px}.decision-message{font-size:20px}.swipe-hint{font-size:8px}}
